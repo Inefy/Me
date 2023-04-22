@@ -2,10 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Portfolio from './components/Portfolio';
-import { AppBar, Toolbar, Typography, Container, IconButton } from '@mui/material';
+import Contact from './components/Contact';
+import { AppBar, Toolbar, Typography, Container, IconButton, Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import { GitHub, LinkedIn } from '@mui/icons-material';
 import './App.css';
 
 function App() {
@@ -32,24 +33,37 @@ function App() {
       <div className="App">
         <StyledAppBar position="static">
           <StyledToolbar>
-            <div>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <NavigationLink to="/">
                 <Typography variant="h6">Home</Typography>
               </NavigationLink>
               <NavigationLink to="/portfolio">
                 <Typography variant="h6">Portfolio</Typography>
               </NavigationLink>
-            </div>
-            <div>
+              <NavigationLink to="/contact">
+                <Typography variant="h6">Contact</Typography>
+              </NavigationLink>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <IconButton
-                edge="end"
-                color="inherit"
-                aria-label="GitHub"
-                onClick={() => window.open('https://github.com/Inefy', '_blank')}
+                href="https://github.com/Inefy"
+                target="_blank"
+                rel="noopener"
+                aria-label="github"
+                sx={{ color: 'common.white' }}
               >
-                <GitHubIcon />
+                <GitHub />
               </IconButton>
-            </div>
+              <IconButton
+                href="https://www.linkedin.com/in/zac-batten/"
+                target="_blank"
+                rel="noopener"
+                aria-label="linkedin"
+                sx={{ color: 'common.white' }}
+              >
+                <LinkedIn />
+              </IconButton>
+            </Box>
           </StyledToolbar>
         </StyledAppBar>
         <Container>
@@ -57,6 +71,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} index />
               <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/contact" element={<Contact />} />
             </Routes>
           </div>
         </Container>
