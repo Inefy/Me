@@ -11,6 +11,7 @@ import {
 import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
 import { AccountCircle, Email, Message } from '@mui/icons-material';
+import { useForm, ValidationError } from '@formspree/react';
 
 const FormWrapper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3),
@@ -28,22 +29,12 @@ const SubmitButton = styled(Button)(({ theme }) => ({
 }));
 
 const Contact = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [state, handleSubmit] = useForm("xwkjvjnj");
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const formVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
-  };
-
-  const successMessageVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIsSubmitted(true);
   };
 
   const handleChange = (event) => {
@@ -101,6 +92,11 @@ const Contact = () => {
                   ),
                 }}
               />
+              <ValidationError
+                prefix="Email"
+                field="email"
+                errors={state.errors}
+              />
               <TextField
                 fullWidth
                 label="Message"
@@ -119,22 +115,20 @@ const Contact = () => {
                   ),
                 }}
               />
-              <SubmitButton type="submit" variant="contained" color="primary" disabled={!isFormValid}>
+              <ValidationError
+                prefix="Message"
+                field="message"
+                errors={state.errors}
+              />
+              <SubmitButton type="submit" variant="contained" color="primary" disabled={!isFormValid || state.submitting}>
                 Send Message
               </SubmitButton>
             </form>
 
-            {isSubmitted && (
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={successMessageVariants}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                <Typography variant="h6" color="success.main" align="center" style={{ marginTop: '16px' }}>
-                  Message sent successfully!
-                </Typography>
-              </motion.div>
+            {state.succeeded && (
+              <Typography variant="h6" color="success.main" align="center" style={{ marginTop: '16px' }}>
+                Message sent successfully!
+              </Typography>
             )}
           </Container>
         </FormWrapper>
@@ -144,3 +138,4 @@ const Contact = () => {
 };
 
 export default Contact;
+
