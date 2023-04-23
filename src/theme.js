@@ -1,18 +1,13 @@
 import { createTheme } from '@mui/material/styles';
 
-const theme = createTheme({
-  // Add custom properties and overrides here
-  palette: {
-    primary: {
-      main: '#3f51b5', // You can change this value to your desired primary color
+const theme = (darkMode) =>
+  createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+      primary: {
+        main: darkMode ? '#212121' : '#3f51b5',
+      },
     },
-    secondary: {
-      main: '#f50057', // You can change this value to your desired secondary color
-    },
-  },
-  typography: {
-    // Add custom typography options here
-  },
-});
+  });
 
 export default theme;

@@ -18,8 +18,8 @@ const WelcomeText = styled(Typography)(({ theme }) => ({
 function Home() {
   return (
     <HomeWrapper>
-      <WelcomeText>Welcome to my portfolio!</WelcomeText>
-      <Typography>
+      <WelcomeText color="text.primary">Welcome to my portfolio!</WelcomeText>
+      <Typography color="text.primary">
         Explore my projects and get in touch if you're interested in collaborating.
       </Typography>
     </HomeWrapper>
