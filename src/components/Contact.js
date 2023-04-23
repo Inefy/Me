@@ -1,5 +1,4 @@
-import React from 'react';
-import { useForm, ValidationError } from '@formspree/react';
+import React, { useState } from 'react';
 import {
   Container,
   TextField,
@@ -28,16 +27,23 @@ const SubmitButton = styled(Button)(({ theme }) => ({
   alignSelf: 'center',
 }));
 
-function ContactForm() {
-  const [state, handleSubmit] = useForm("YOUR_FORMSPREE_ID");
+const Contact = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
   const formVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
   };
+
   const successMessageVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setIsSubmitted(true);
   };
 
   const handleChange = (event) => {
@@ -46,118 +52,95 @@ function ContactForm() {
 
   const isFormValid = formData.name && formData.email && formData.message;
 
-  if (state.succeeded) {
-    return (
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={successMessageVariants}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
-        <Typography variant="h6" color="success.main" align="center" style={{ marginTop: '16px' }}>
-          Message sent successfully!
-        </Typography>
-      </motion.div>
-    );
-  }
-
-  return (
-    <FormWrapper
-      elevation={3}
-      component={motion.div}
-      initial="hidden"
-      animate="visible"
-      variants={formVariants}
-      transition={{ duration: 0.5 }}
-    >
-      <Container maxWidth="sm">
-        <FormTitle variant="h4" gutterBottom>
-          Contact Me
-        </FormTitle>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            fullWidth
-            label="Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            margin="normal"
-            variant="outlined"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            fullWidth
-            label="Email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            margin="normal"
-            variant="outlined"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Email />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            fullWidth
-            label="Message"
-            name="message"
-            multiline
-            rows={4}
-            value={formData.message}
-            onChange={handleChange}
-            margin="normal"
-            variant="outlined"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Message />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <SubmitButton type="submit" variant="contained" color="primary" disabled={!isFormValid}>
-            Send Message
-          </SubmitButton>
-        </form>
-        <ValidationError
-          prefix="Name"
-          field="name"
-          errors={state.errors}
-        />
-        <ValidationError
-          prefix="Email"
-          field="email"
-          errors={state.errors}
-        />
-        <ValidationError
-          prefix="Message"
-          field="message"
-          errors={state.errors}
-        />
-      </Container>
-    </FormWrapper>
-  );
-}
-
-function App() {
   return (
     <Grid container justifyContent="center" style={{ height: 'calc(100vh - 64px)' }}>
       <Grid item xs={12} sm={8} md={6}>
-        <ContactForm />
+        <FormWrapper
+          elevation={3}
+          component={motion.div}
+          initial="hidden"
+          animate="visible"
+          variants={formVariants}
+          transition={{ duration: 0.5 }}
+        >
+          <Container maxWidth="sm">
+            <FormTitle variant="h4" gutterBottom>
+              Contact Me
+            </FormTitle>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                fullWidth
+                label="Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                margin="normal"
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AccountCircle />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                fullWidth
+                label="Email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                margin="normal"
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Email />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                fullWidth
+                label="Message"
+                name="message"
+                multiline
+                rows={4}
+                value={formData.message}
+                onChange={handleChange}
+                margin="normal"
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Message />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <SubmitButton type="submit" variant="contained" color="primary" disabled={!isFormValid}>
+                Send Message
+              </SubmitButton>
+            </form>
+
+            {isSubmitted && (
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={successMessageVariants}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                <Typography variant="h6" color="success.main" align="center" style={{ marginTop: '16px' }}>
+                  Message sent successfully!
+                </Typography>
+              </motion.div>
+            )}
+          </Container>
+        </FormWrapper>
       </Grid>
     </Grid>
   );
-}
+};
 
-export default App;
+export default Contact;
