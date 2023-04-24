@@ -5,16 +5,16 @@ import { motion } from 'framer-motion';
 const Portfolio = () => {
   const projects = [
     {
-      name: 'Project 1',
-      description: 'A brief description of Project 1.',
-      technologies: ['React', 'Node.js'],
-      repoLink: 'https://github.com/yourusername/project1',
+      name: 'This website',
+      description: 'Just my own personal website to showcase my projects and skills.',
+      technologies: ['React', 'Material-UI', 'Framer Motion'],
+      repoLink: 'https://github.com/Inefy/personalsite',
     },
     {
-      name: 'Project 2',
-      description: 'A brief description of Project 2.',
-      technologies: ['Python', 'Django'],
-      repoLink: 'https://github.com/yourusername/project2',
+      name: 'Apple Health Visualizer',
+      description: 'Takes data from the Apple Health app and visualizes it.',
+      technologies: ['Python', 'Pandas'],
+      repoLink: 'https://github.com/Inefy/AppleHealthVisualizer',
     },
   ];
 
