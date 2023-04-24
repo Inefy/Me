@@ -1,6 +1,24 @@
 import React from 'react';
-import { Card, CardContent, Typography, Grid } from '@mui/material';
+import { Card, CardContent, Typography, Grid, Button } from '@mui/material';
 import { motion } from 'framer-motion';
+import { styled } from '@mui/system';
+
+const FixedHeightCardContent = styled(CardContent)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  height: '260px',
+  borderRadius: '15px',
+}));
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  borderRadius: '15px',
+  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
+  transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+  '&:hover': {
+    boxShadow: '0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)',
+  },
+}));
 
 const Portfolio = () => {
   const projects = [
@@ -43,20 +61,28 @@ const Portfolio = () => {
               variants={variants}
               transition={{ ...transition, delay: transition.delay * (index + 1) }}
             >
-              <Card>
-                <CardContent>
-                  <Typography variant="h5">{project.name}</Typography>
-                  <Typography variant="body1">{project.description}</Typography>
-                  <Typography variant="subtitle1">
-                    Technologies: {project.technologies.join(', ')}
-                  </Typography>
-                  <Typography variant="body2">
-                    <a href={project.repoLink} target="_blank" rel="noopener noreferrer">
-                      View on GitHub
-                    </a>
-                  </Typography>
-                </CardContent>
-              </Card>
+              <StyledCard>
+                <FixedHeightCardContent>
+                  <div>
+                    <Typography variant="h5">{project.name}</Typography>
+                    <Typography variant="body1">{project.description}</Typography>
+                    <Typography variant="subtitle1">
+                      Technologies: {project.technologies.join(', ')}
+                    </Typography>
+                  </div>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    sx={{ marginTop: '1rem' }}
+                    href={project.repoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View on GitHub
+                  </Button>
+                </FixedHeightCardContent>
+              </StyledCard>
             </motion.div>
           </Grid>
         ))}
