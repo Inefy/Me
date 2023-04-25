@@ -12,6 +12,7 @@ import theme from './theme';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
+  // Styled components for AppWrapper, StyledAppBar, StyledToolbar, and NavigationLink
   const AppWrapper = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.default,
     minHeight: '100vh',
@@ -31,6 +32,7 @@ function App() {
     textDecoration: 'none',
   });
 
+  // Function to toggle dark mode
   const handleDarkModeToggle = () => {
     setDarkMode(!darkMode);
   };
@@ -42,6 +44,7 @@ function App() {
         <AppWrapper>
           <StyledAppBar position="static" sx={{ backgroundColor: (theme) => theme.palette.primary.main }}>
             <StyledToolbar>
+              {/*  Navigation links section */}
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <NavigationLink to="/">
                   <Typography variant="h6" sx={{ color: (theme) => theme.palette.text.primary, margin: (theme) => theme.spacing(0, 2) }}>
@@ -59,6 +62,7 @@ function App() {
                   </Typography>
                 </NavigationLink>
               </Box>
+              {/* Social icons and dark mode toggle section */}
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <IconButton
                   onClick={handleDarkModeToggle}
@@ -89,6 +93,7 @@ function App() {
           </StyledAppBar>
           <Container>
             <div className="App-content">
+              {/*  Routes for different pages */}
               <Routes>
                 <Route path="/" element={<Home />} index />
                 <Route path="/portfolio" element={<Portfolio />} />
@@ -101,4 +106,10 @@ function App() {
     </ThemeProvider>
   );
 }
+
 export default App;
+
+
+
+
+

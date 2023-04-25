@@ -3,6 +3,7 @@ import { Card, CardContent, Typography, Grid, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/system';
 
+// Styled components for fixed-height CardContent and custom Card
 const FixedHeightCardContent = styled(CardContent)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -21,6 +22,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 const Portfolio = () => {
+  // Array of project objects
   const projects = [
     {
       name: 'This website',
@@ -36,11 +38,13 @@ const Portfolio = () => {
     },
   ];
 
+  // Framer Motion variants for hidden and visible states
   const variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
   };
 
+  // Framer Motion transition settings
   const transition = {
     duration: 0.5,
     delay: 0.3,
@@ -92,3 +96,4 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
+

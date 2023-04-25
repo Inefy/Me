@@ -13,6 +13,7 @@ import { motion } from 'framer-motion';
 import { AccountCircle, Email, Message } from '@mui/icons-material';
 import { useForm, ValidationError } from '@formspree/react';
 
+// Styled components for FormWrapper, FormTitle, and SubmitButton
 const FormWrapper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3),
   borderRadius: '10px',
@@ -32,15 +33,18 @@ const Contact = () => {
   const [state, handleSubmit] = useForm("xwkjvjnj");
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
+  // Framer Motion variants for form animation
   const formVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
   };
 
+  // Handles form input changes
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  // Check if the form is valid
   const isFormValid = formData.name && formData.email && formData.message;
 
   return (
@@ -120,13 +124,23 @@ const Contact = () => {
                 field="message"
                 errors={state.errors}
               />
-              <SubmitButton type="submit" variant="contained" color="primary" disabled={!isFormValid || state.submitting}>
+              <SubmitButton
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={!isFormValid || state.submitting}
+              >
                 Send Message
               </SubmitButton>
             </form>
 
             {state.succeeded && (
-              <Typography variant="h6" color="success.main" align="center" style={{ marginTop: '16px' }}>
+              <Typography
+                variant="h6"
+                color="success.main"
+                align="center"
+                style={{ marginTop: '16px' }}
+              >
                 Message sent successfully!
               </Typography>
             )}
@@ -138,4 +152,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
