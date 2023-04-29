@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import CanvasDraw from 'react-canvas-draw';
 import { Button, ButtonGroup, Slider, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import { ChromePicker } from 'react-color';
 
 const PaintingCanvas = () => {
@@ -45,40 +46,48 @@ const PaintingCanvas = () => {
   ];
 
   return (
-    <div
+    <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: '#C0C0C0',
-        padding: 2,
-        borderRadius: '5px',
+        backgroundColor: '#F0F0F0',
+        padding: 4,
+        borderRadius: '20px',
+        boxShadow: '0 6px 12px rgba(0,0,0,0.15)',
+        fontFamily: 'Roboto, sans-serif',
       }}
     >
-      <Typography variant="h5">Retro Painting Canvas</Typography>
-      <div
+      <Typography variant="h4" sx={{ marginBottom: 2, fontWeight: 'bold' }}>
+        Retro Painting Canvas
+      </Typography>
+      <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-around',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           width: '100%',
+          marginBottom: 2,
         }}
       >
-        <ButtonGroup>
-          <Button onClick={handleUndo} variant="contained" color="primary">
+        <ButtonGroup variant="contained" sx={{ boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <Button onClick={handleUndo} color="primary">
             Undo
           </Button>
-          <Button onClick={handleClear} variant="contained" color="secondary">
+          <Button onClick={handleClear} color="error">
             Clear
           </Button>
-          <Button onClick={toggleColorPicker} variant="contained">
+          <Button onClick={toggleColorPicker} color="info">
             Color Picker
           </Button>
         </ButtonGroup>
         {colorPickerVisible && (
-          <div
+          <Box
             sx={{
               position: 'absolute',
               zIndex: 2,
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              borderRadius: '5px',
             }}
           >
             <ChromePicker color={brushColor} onChange={handleColorChange} />
@@ -86,11 +95,11 @@ const PaintingCanvas = () => {
               onClick={toggleColorPicker}
               variant="contained"
               color="primary"
-              sx={{ marginTop: 1 }}
+              sx={{ marginTop: 1, borderRadius: '5px' }}
             >
               Confirm Color
             </Button>
-          </div>
+          </Box>
         )}
         <Slider
           value={brushSize}
@@ -101,12 +110,14 @@ const PaintingCanvas = () => {
           aria-label="Brush size"
           color="primary"
         />
-      </div>
-      <div
+      </Box>
+      <Box
         sx={{
-          border: '2px solid black',
+          border: '2px solid #333',
+          borderRadius: '10px',
           marginTop: 1,
           marginBottom: 1,
+          overflow: 'hidden',
         }}
       >
         <CanvasDraw
@@ -117,14 +128,15 @@ const PaintingCanvas = () => {
           canvasHeight={window.innerHeight * 0.6}
           lazyRadius={0}
         />
- </div>
-      <div
+      </Box>
+      <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateRows: 'repeat(8, 1fr)',
+          gap: '0.5rem',
           width: '100%',
-          flexWrap: 'wrap',
+          marginTop: 1,
         }}
       >
         {defaultColors.map((color) => (
@@ -132,16 +144,17 @@ const PaintingCanvas = () => {
             key={color}
             onClick={() => handleColorChange({ hex: color })}
             sx={{
-              backgroundColor: color,
-              width: '10%',
-              height: '2rem',
-              margin: '0.25rem',
-            }}
-          ></Button>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default PaintingCanvas;
+                backgroundColor: color,
+                width: '100%',
+                height: '2rem',
+                borderRadius: '10px',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              }}
+            ></Button>
+          ))}
+        </Box>
+      </Box>
+    );
+  };
+  
+  export default PaintingCanvas;
