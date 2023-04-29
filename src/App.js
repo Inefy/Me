@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
+import PaintingCanvas from './components/PaintingCanvas';
 import { AppBar, Toolbar, Typography, Container, IconButton, Box, CssBaseline } from '@mui/material';
 import { styled } from '@mui/system';
 import { GitHub, LinkedIn, Brightness4, Brightness7 } from '@mui/icons-material';
@@ -61,6 +62,11 @@ function App() {
                     Contact
                   </Typography>
                 </NavigationLink>
+                <NavigationLink to="/paint">
+                  <Typography variant="h6" sx={{ color: (theme) => theme.palette.text.primary, margin: (theme) => theme.spacing(0, 2) }}>
+                    Paint
+                  </Typography>
+                </NavigationLink>
               </Box>
               {/* Social icons and dark mode toggle section */}
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -98,6 +104,7 @@ function App() {
                 <Route path="/" element={<Home />} index />
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/paint" element={<PaintingCanvas />} />
               </Routes>
             </div>
           </Container>
@@ -108,8 +115,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
