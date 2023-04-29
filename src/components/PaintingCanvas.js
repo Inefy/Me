@@ -33,6 +33,25 @@ const PaintingCanvas = () => {
     setColorPickerVisible(!colorPickerVisible);
   };
 
+  const defaultColors = [
+    '#000000',
+    '#808080',
+    '#800000',
+    '#FF0000',
+    '#808000',
+    '#FFFF00',
+    '#008000',
+    '#00FF00',
+    '#008080',
+    '#00FFFF',
+    '#000080',
+    '#0000FF',
+    '#800080',
+    '#FF00FF',
+    '#C0C0C0',
+    '#FFFFFF',
+  ];
+
   return (
     <div
       sx={{
@@ -71,6 +90,14 @@ const PaintingCanvas = () => {
             }}
           >
             <ChromePicker color={brushColor} onChange={handleColorChange} />
+            <Button
+              onClick={toggleColorPicker}
+              variant="contained"
+              color="primary"
+              sx={{ marginTop: 1 }}
+            >
+              Confirm Color
+            </Button>
           </div>
         )}
         <Slider
@@ -98,6 +125,28 @@ const PaintingCanvas = () => {
           canvasHeight={window.innerHeight * 0.6}
           lazyRadius={0}
         />
+ </div>
+      <div
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '100%',
+          flexWrap: 'wrap',
+        }}
+      >
+        {defaultColors.map((color) => (
+          <Button
+            key={color}
+            onClick={() => handleColorChange({ hex: color })}
+            sx={{
+              backgroundColor: color,
+              width: '10%',
+              height: '2rem',
+              margin: '0.25rem',
+            }}
+          ></Button>
+        ))}
       </div>
     </div>
   );
