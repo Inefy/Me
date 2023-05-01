@@ -1,25 +1,51 @@
-import React, { useRef, useState } from 'react';
-import CanvasDraw from 'react-canvas-draw';
+import React, { useRef, useEffect, useState } from 'react';
 import { Button, ButtonGroup, Slider, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { ChromePicker } from 'react-color';
+import { fabric } from 'fabric';
+import BrushTypeSelector from './BrushTypeSelector';
+import ColourSelector from './ColourSelector';
 
 const PaintingCanvas = () => {
-    const canvasDrawRef = useRef();
+    const canvasRef = useRef();
+    const [canvas, setCanvas] = useState(null);
     const [brushColor, setBrushColor] = useState('#000000');
     const [brushSize, setBrushSize] = useState(2);
-    const [colorPickerVisible, setColorPickerVisible] = useState(false);
+    const [brushType, setBrushType] = useState('PencilBrush');
+
+    useEffect(() => {
+        if (!canvasRef.current) return;
+        const newCanvas = new fabric.Canvas(canvasRef.current, {
+            isDrawingMode: true,
+        });
+        setCanvas(newCanvas);
+    }, []);
+
+    useEffect(() => {
+        if (!canvas) return;
+        const brush = new fabric[brushType](canvas);
+        brush.color = brushColor;
+        brush.width = brushSize;
+        brush.strokeLineCap = 'round';
+        brush.strokeLineJoin = 'round';
+        canvas.freeDrawingBrush = brush;
+    }, [canvas, brushColor, brushSize, brushType]);
+
+    const handleBrushTypeChange = (event) => {
+        setBrushType(event.target.value);
+    };
 
     const handleUndo = () => {
-        if (canvasDrawRef.current) {
-            canvasDrawRef.current.undo();
+        if (!canvas) return;
+        const lastObject = canvas._objects.pop();
+        if (lastObject) {
+            canvas.remove(lastObject);
+            canvas.renderAll();
         }
     };
 
     const handleClear = () => {
-        if (canvasDrawRef.current) {
-            canvasDrawRef.current.clear();
-        }
+        if (!canvas) return;
+        canvas.clear();
     };
 
     const handleColorChange = (color) => {
@@ -28,10 +54,6 @@ const PaintingCanvas = () => {
 
     const handleSizeChange = (event, newValue) => {
         setBrushSize(newValue);
-    };
-
-    const toggleColorPicker = () => {
-        setColorPickerVisible(!colorPickerVisible);
     };
 
     const defaultColors = [
@@ -58,7 +80,7 @@ const PaintingCanvas = () => {
             }}
         >
             <Typography variant="h4" sx={{ marginBottom: 2, fontWeight: 'bold' }}>
-                Retro Painting Canvas
+                Paint something!
             </Typography>
             <Box
                 sx={{
@@ -76,11 +98,8 @@ const PaintingCanvas = () => {
                     <Button onClick={handleClear} color="error">
                         Clear
                     </Button>
-                    <Button onClick={toggleColorPicker} color="info">
-                        Color Picker
-                    </Button>
                 </ButtonGroup>
-                {/* ... (rest of the color picker code) */}
+                <BrushTypeSelector brushType={brushType} handleBrushTypeChange={handleBrushTypeChange} />
                 <Slider
                     value={brushSize}
                     onChange={handleSizeChange}
@@ -100,41 +119,14 @@ const PaintingCanvas = () => {
                     overflow: 'hidden',
                 }}
             >
-                <CanvasDraw
-                    ref={canvasDrawRef}
-                    brushColor={brushColor}
-                    brushRadius={brushSize}
-                    canvasWidth={window.innerWidth * 0.8}
-                    canvasHeight={window.innerHeight * 0.6}
-                    lazyRadius={0}
+                <canvas
+                    ref={canvasRef}
+                    width={window.innerWidth * 0.8}
+                    height={window.innerHeight * 0.6}
                 />
             </Box>
-            <Box
-                sx={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(14, 1fr)',
-                    gridTemplateRows: 'repeat(2, 1fr)',
-                    gap: '0.1rem',
-                    width: '100%',
-                    marginTop: 1,
-                }}
-            >
-                {defaultColors.map((color) => (
-                    <div
-                        key={color}
-                        onClick={() => handleColorChange({ hex: color })}
-                        style={{
-                            backgroundColor: color,
-                            width: '1.5rem',
-                            height: '1.5rem',
-                            borderRadius: '2px',
-                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                            cursor: 'pointer',
-                        }}
-                    ></div>
-                ))}
-            </Box>
+            <ColourSelector defaultColors={defaultColors} handleColorChange={handleColorChange} />
         </Box>
     );
-}
+};
 export default PaintingCanvas;
