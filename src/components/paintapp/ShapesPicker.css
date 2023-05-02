@@ -1,0 +1,23 @@
+.shapes-picker {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .shape-button {
+    width: 36px;
+    height: 36px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .shape-button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .shape-button:focus {
+    outline: none;
+    border-color: #4caf50;
+  }
