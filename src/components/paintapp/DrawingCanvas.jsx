@@ -13,6 +13,23 @@ const DrawingCanvas = ({
   const [lines, setLines] = useState([]);
   const isDrawing = useRef(false);
 
+  const handleMouseMove = (event) => {
+    if (!isDrawing.current) {
+      return;
+    }
+    const stage = event.target.getStage();
+    const pointerPosition = stage.getPointerPosition();
+    setLines((currentLines) => {
+      const lastLine = currentLines[currentLines.length - 1];
+      return [
+        ...currentLines.slice(0, -1),
+        {
+          ...lastLine,
+          points: [...lastLine.points, pointerPosition.x, pointerPosition.y],
+        },
+      ];
+    });
+  };
 
   return (
     <div className="drawing-canvas">
@@ -26,9 +43,8 @@ const DrawingCanvas = ({
           isDrawing.current = false;
           onDrawingEnd();
         }}
-        onMouseMove={(e) => {
-          // Handle mouse move for drawing
-        }}
+        onMouseMove={handleMouseMove}
+
         onTouchStart={() => {
           isDrawing.current = true;
         }}
@@ -36,9 +52,7 @@ const DrawingCanvas = ({
           isDrawing.current = false;
           onDrawingEnd();
         }}
-        onTouchMove={(e) => {
-          // Handle touch move for drawing
-        }}
+        onTouchMove={handleMouseMove}
       >
         <Layer>
           {lines.map((line, i) => (
