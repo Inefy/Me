@@ -31,6 +31,21 @@ const DrawingCanvas = ({
     });
   };
 
+  useEffect(() => {
+    if (isDrawing.current) {
+      onNewObjectAdded();
+      setLines((currentLines) => [
+        ...currentLines,
+        {
+          color,
+          thickness,
+          points: [],
+          brushStyle,
+        },
+      ]);
+    }
+  }, [brushStyle, color, thickness, onNewObjectAdded]);
+
   return (
     <div className="drawing-canvas">
       <Stage
