@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
-import PaintingCanvas from './components/PaintingCanvas';
+import PaintApp from './components/PaintingCanvas';
 import { AppBar, Toolbar, Typography, Container, IconButton, Box, CssBaseline } from '@mui/material';
 import { styled } from '@mui/system';
 import { GitHub, LinkedIn, Brightness4, Brightness7 } from '@mui/icons-material';
@@ -104,7 +104,7 @@ function App() {
                 <Route path="/" element={<Home />} index />
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/paint" element={<PaintingCanvas />} />
+                <Route path="/paint" element={<PaintApp />} />
               </Routes>
             </div>
           </Container>
