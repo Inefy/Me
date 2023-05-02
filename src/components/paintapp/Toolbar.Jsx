@@ -1,4 +1,3 @@
-// Toolbar.js
 import React from 'react';
 import ColorPicker from './ColorPicker';
 import BrushStylePicker from './BrushStylePicker';
