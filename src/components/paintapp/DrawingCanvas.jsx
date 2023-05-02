@@ -31,6 +31,14 @@ const DrawingCanvas = ({
     });
   };
 
+  const handleObjectClick = (event, index) => {
+    if (event.evt.button !== 0) {
+      return;
+    }
+    setSelectedObject(index);
+    event.cancelBubble = true;
+  };
+
   useEffect(() => {
     if (isDrawing.current) {
       onNewObjectAdded();
@@ -49,6 +57,7 @@ const DrawingCanvas = ({
   return (
     <div className="drawing-canvas">
       <Stage
+        onClick={() => setSelectedObject(null)}
         width={window.innerWidth}
         height={window.innerHeight}
         onMouseDown={() => {
@@ -71,7 +80,14 @@ const DrawingCanvas = ({
       >
         <Layer>
           {lines.map((line, i) => (
-            <Line key={i} points={line.points} stroke={line.color} strokeWidth={line.thickness} />
+            <Line
+            key={i}
+            points={line.points}
+            stroke={line.color}
+            strokeWidth={line.thickness}
+            draggable
+            onClick={(e) => handleObjectClick(e, i)}
+          />
           ))}
         </Layer>
       </Stage>
