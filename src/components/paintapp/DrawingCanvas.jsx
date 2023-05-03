@@ -3,12 +3,10 @@ import { Stage, Layer, Line } from 'react-konva';
 import './DrawingCanvas.css';
 
 const DrawingCanvas = ({
-  brushStyle,
-  color,
-  thickness,
-  shape,
-  onNewObjectAdded,
-  onDrawingEnd,
+  selectedColor,
+  selectedThickness,
+  selectedBrushStyle,
+  selectedShape,
 }) => {
   const [lines, setLines] = useState([]);
   const isDrawing = useRef(false);
