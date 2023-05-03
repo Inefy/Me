@@ -1,8 +1,17 @@
-.brush-style-picker select {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    appearance: none;
-  }
+.brush-style-picker {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.brush-style-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.brush-style-button:hover {
+  color: #4caf50;
+}
