@@ -1,0 +1,8 @@
+.paint-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 64px); /* subtract the AppBar height */
+    background-color: #f0f2f5; /* light background color */
+  }
+  

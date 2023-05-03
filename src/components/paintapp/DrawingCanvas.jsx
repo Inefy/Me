@@ -35,9 +35,11 @@ const DrawingCanvas = ({
     if (event.evt.button !== 0) {
       return;
     }
-    setSelectedObject(index);
+    setSelectedObject(shape);
     event.cancelBubble = true;
   };
+
+  const [selectedObject, setSelectedObject] = useState(null);
 
   useEffect(() => {
     if (isDrawing.current) {
