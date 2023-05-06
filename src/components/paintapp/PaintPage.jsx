@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import BrushStylesPicker from './BrushStylePicker';
 import ColorPicker from './ColorPicker';
-import ShapesPicker from './ShapesPicker';
+import Shapes from './Shapes';
 import ThicknessSlider from './ThicknessSlider';
 import Toolbar from './Toolbar';
 import DrawingCanvas from './DrawingCanvas';

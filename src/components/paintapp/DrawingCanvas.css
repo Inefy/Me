@@ -1,11 +1,13 @@
 .drawing-canvas {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.15);
   border-radius: 15px;
   overflow: hidden;
+  background-color: white;
+  border: 2px solid rgba(0, 0, 0, 0.1);
 }

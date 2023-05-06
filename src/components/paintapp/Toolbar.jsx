@@ -2,7 +2,7 @@ import React from 'react';
 import ColorPicker from './ColorPicker';
 import BrushStylePicker from './BrushStylePicker';
 import ThicknessSlider from './ThicknessSlider';
-import ShapesPicker from './ShapesPicker';
+import ShapesPicker from './Shapes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import './Toolbar.css';

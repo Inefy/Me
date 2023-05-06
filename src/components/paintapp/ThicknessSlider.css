@@ -1,4 +1,10 @@
+.thickness-slider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .thickness-slider input[type='range'] {
-    width: 100%;
-    cursor: pointer;
-  }
+  width: 100px;
+  cursor: pointer;
+}

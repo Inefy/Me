@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faSquare, faStar, faHeart } from '@fortawesome/free-solid-svg-icons';
-import './ShapesPicker.css';
+import './Shapes.css';
 
 const shapes = [
   { id: 'circle', name: 'Circle', icon: faCircle },
