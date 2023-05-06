@@ -29,6 +29,10 @@ const PaintPage = () => {
     setSelectedThickness(thickness);
   };
 
+  const deselectShape = () => {
+    setSelectedShape(null);
+  };
+
   const handleSave = () => {
     // Implement save functionality here
   };
@@ -46,6 +50,7 @@ const PaintPage = () => {
         selectedColor={selectedColor}
         selectedThickness={selectedThickness}
         selectedBrushStyle={selectedBrushStyle}
+        deselectShape={deselectShape}
         selectedShape={selectedShape}
       />
     </div>

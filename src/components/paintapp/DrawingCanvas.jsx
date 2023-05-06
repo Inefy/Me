@@ -8,6 +8,7 @@ const DrawingCanvas = ({
   selectedThickness,
   selectedBrushStyle,
   selectedShape,
+  deselectShape, 
 }) => {
   const [lines, setLines] = useState([]);
   const isDrawing = useRef(false);
@@ -54,7 +55,6 @@ const DrawingCanvas = ({
     };
 
 
-
     switch (selectedBrushStyle) {
       case 'spray':
         const r = selectedThickness / 2;
@@ -75,6 +75,7 @@ const DrawingCanvas = ({
 
   const handleMouseDown = (event) => {
     if (event.target instanceof Konva.Stage) {
+      deselectShape();
       if (selectedShape && !isDragging) {
         const stage = event.target.getStage();
         const pointerPosition = stage.getPointerPosition();
@@ -177,14 +178,11 @@ const DrawingCanvas = ({
                 return <Path key={`shape-${i}`} {...shape} onDragStart={handleDragStart} onDragEnd={handleDragEnd} />;
               default:
                 return null;
-
             }
-
           })}
         </Layer>
       </Stage>
     </div>
   );
 };
-
 export default DrawingCanvas;
