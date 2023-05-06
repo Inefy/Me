@@ -8,7 +8,7 @@ const DrawingCanvas = ({
   selectedThickness,
   selectedBrushStyle,
   selectedShape,
-  deselectShape, 
+  deselectShape,
 }) => {
   const [lines, setLines] = useState([]);
   const isDrawing = useRef(false);
@@ -54,7 +54,6 @@ const DrawingCanvas = ({
       });
     };
 
-
     switch (selectedBrushStyle) {
       case 'spray':
         const r = selectedThickness / 2;
@@ -67,6 +66,19 @@ const DrawingCanvas = ({
           }
         }
         break;
+      case 'eraser':
+        addPoints(pointerPosition.x, pointerPosition.y);
+        const eraserRadius = selectedThickness / 2;
+        const eraserArea = new Konva.Circle({
+          x: pointerPosition.x,
+          y: pointerPosition.y,
+          radius: eraserRadius,
+          fill: 'white',
+        });
+        layerRef.current.add(eraserArea);
+        layerRef.current.draw();
+        eraserArea.destroy();
+        break;
       default:
         addPoints(pointerPosition.x, pointerPosition.y);
         break;
@@ -76,6 +88,7 @@ const DrawingCanvas = ({
   const handleMouseDown = (event) => {
     if (event.target instanceof Konva.Stage) {
       deselectShape();
+
       if (selectedShape && !isDragging) {
         const stage = event.target.getStage();
         const pointerPosition = stage.getPointerPosition();
@@ -162,14 +175,15 @@ const DrawingCanvas = ({
               tension={0.5}
               lineCap="round"
               globalCompositeOperation={
-                selectedBrushStyle === 'eraser' ? 'destination-out' : 'source-over'
-              }
+                selectedBrushStyle === 'eraser' ? 'destination-out' :   'source-over'
+              } 
             />
           ))}
           {shapes.map((shape, i) => {
             switch (shape.type) {
               case 'circle':
-                return <Circle key={`shape-${i}`} {...shape} onDragStart={handleDragStart} onDragEnd={handleDragEnd} />;
+                return <Circle key={`shape-${i}`} {...shape} onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd} />;
               case 'rect':
                 return <Rect key={`shape-${i}`} {...shape} onDragStart={handleDragStart} onDragEnd={handleDragEnd} />;
               case 'star':
@@ -185,4 +199,5 @@ const DrawingCanvas = ({
     </div>
   );
 };
+
 export default DrawingCanvas;
