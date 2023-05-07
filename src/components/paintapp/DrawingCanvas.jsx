@@ -17,7 +17,7 @@ const DrawingCanvas = ({
   const layerRef = useRef(null);
   const [canvasSize, setCanvasSize] = useState({ width: window.innerWidth * 0.8, height: window.innerHeight * 0.8 });
   const [isDragging, setIsDragging] = useState(false);
-
+  
   const addShape = (newShape) => {
     setShapes((prevShapes) => [...prevShapes, newShape]);
   };
@@ -57,27 +57,18 @@ const DrawingCanvas = ({
     switch (selectedBrushStyle) {
       case 'spray':
         const r = selectedThickness / 2;
-        for (let i = 0; i < 6 + r / 5; i++) {
-          const rx = (Math.random() * 2 - 1) * r;
-          const ry = (Math.random() * 2 - 1) * r;
-          const d = rx * rx + ry * ry;
-          if (d <= r * r) {
-            addPoints(pointerPosition.x + Math.floor(rx), pointerPosition.y + Math.floor(ry));
-          }
+        const sprayPoints = [];
+        for (let i = 0; i < 2; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const radius = Math.random() * r;
+          const rx = pointerPosition.x + radius * Math.cos(angle);
+          const ry = pointerPosition.y + radius * Math.sin(angle);
+          sprayPoints.push(rx, ry);
         }
+        addPoints(...sprayPoints);
         break;
       case 'eraser':
         addPoints(pointerPosition.x, pointerPosition.y);
-        const eraserRadius = selectedThickness / 2;
-        const eraserArea = new Konva.Circle({
-          x: pointerPosition.x,
-          y: pointerPosition.y,
-          radius: eraserRadius,
-          fill: 'white',
-        });
-        layerRef.current.add(eraserArea);
-        layerRef.current.draw();
-        eraserArea.destroy();
         break;
       default:
         addPoints(pointerPosition.x, pointerPosition.y);
@@ -104,7 +95,7 @@ const DrawingCanvas = ({
             addShape({ type: 'circle', ...newShapeProps, radius: selectedThickness });
             break;
           case 'square':
-            addShape({ type: 'rect', ...newShapeProps, width: selectedThickness * 2, height: selectedThickness * 2 });
+            addShape({ type: 'rect', ...newShapeProps, width: selectedThickness, height: selectedThickness });
             break;
           case 'star':
             addShape({
@@ -134,6 +125,7 @@ const DrawingCanvas = ({
             color: selectedColor,
             thickness: parseFloat(selectedThickness),
             points: [],
+            isEraser: selectedBrushStyle === 'eraser', // Add this line
           },
         ]);
       }
@@ -170,20 +162,19 @@ const DrawingCanvas = ({
             <Line
               key={i}
               points={line.points}
-              stroke={line.color}
+              stroke={line.isEraser ? 'white' : line.color} // Update this line
               strokeWidth={line.thickness}
               tension={0.5}
               lineCap="round"
-              globalCompositeOperation={
-                selectedBrushStyle === 'eraser' ? 'destination-out' :   'source-over'
-              } 
+              globalCompositeOperation={line.isEraser ? 'destination-out' : 'source-over'} // Update this line
             />
           ))}
+
           {shapes.map((shape, i) => {
             switch (shape.type) {
               case 'circle':
                 return <Circle key={`shape-${i}`} {...shape} onDragStart={handleDragStart}
-                onDragEnd={handleDragEnd} />;
+                  onDragEnd={handleDragEnd} />;
               case 'rect':
                 return <Rect key={`shape-${i}`} {...shape} onDragStart={handleDragStart} onDragEnd={handleDragEnd} />;
               case 'star':
