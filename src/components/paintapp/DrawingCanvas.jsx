@@ -17,14 +17,21 @@ const DrawingCanvas = ({
   const layerRef = useRef(null);
   const [canvasSize, setCanvasSize] = useState({ width: window.innerWidth * 0.8, height: window.innerHeight * 0.8 });
   const [isDragging, setIsDragging] = useState(false);
-  
+  const sprayDensity = useRef(50); // Define a variable for spray density
+
   const addShape = (newShape) => {
     setShapes((prevShapes) => [...prevShapes, newShape]);
   };
 
   useEffect(() => {
     const handleResize = () => {
-      setCanvasSize({ width: window.innerWidth * 0.8, height: window.innerHeight * 0.8 });
+      // Store the existing shapes and lines with their old canvas size
+      const oldShapes = [...shapes];
+      const oldLines = [...lines];
+
+      const newCanvasSize = { width: window.innerWidth * 0.8, height: window.innerHeight * 0.8 };
+      setCanvasSize(newCanvasSize);
+
     };
 
     window.addEventListener('resize', handleResize);
@@ -32,7 +39,7 @@ const DrawingCanvas = ({
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [lines, shapes]);
 
   const handleMouseMove = (event) => {
     if (!isDrawing.current) {
@@ -41,14 +48,15 @@ const DrawingCanvas = ({
     const stage = event.target.getStage();
     const pointerPosition = stage.getPointerPosition();
 
-    const addPoints = (x, y) => {
+    const addPoints = (pointsArray) => { // Change addPoints to accept an array of points
       setLines((currentLines) => {
         const lastLine = currentLines[currentLines.length - 1];
+        const newPoints = [...lastLine.points, ...pointsArray];
         return [
           ...currentLines.slice(0, -1),
           {
             ...lastLine,
-            points: [...lastLine.points, x, y],
+            points: newPoints,
           },
         ];
       });
@@ -58,20 +66,20 @@ const DrawingCanvas = ({
       case 'spray':
         const r = selectedThickness / 2;
         const sprayPoints = [];
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < sprayDensity.current; i++) { // Use sprayDensity for the number of dots
           const angle = Math.random() * Math.PI * 2;
           const radius = Math.random() * r;
           const rx = pointerPosition.x + radius * Math.cos(angle);
           const ry = pointerPosition.y + radius * Math.sin(angle);
           sprayPoints.push(rx, ry);
         }
-        addPoints(...sprayPoints);
+        addPoints(sprayPoints);
         break;
       case 'eraser':
-        addPoints(pointerPosition.x, pointerPosition.y);
+        addPoints([pointerPosition.x, pointerPosition.y]);
         break;
       default:
-        addPoints(pointerPosition.x, pointerPosition.y);
+        addPoints([pointerPosition.x, pointerPosition.y]);
         break;
     }
   };
@@ -192,3 +200,4 @@ const DrawingCanvas = ({
 };
 
 export default DrawingCanvas;
+
