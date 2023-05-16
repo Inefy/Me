@@ -37,6 +37,12 @@ const Portfolio = () => {
       technologies: ['Python', 'Pandas'],
       repoLink: 'https://github.com/Inefy/AppleHealthVisualizer',
     },
+    {
+      name: 'SC2AI',
+      description: 'A StarCraft II AI must be trined to become the very best(like no one ever was).',
+      technologies: ['Python', 'TensorFlow', 'PySC2'],
+      repoLink: 'https://github.com/Inefy/sc2Bot',
+    }
   ];
 
   // Framer Motion variants for hidden and visible states
