@@ -13,7 +13,7 @@ import { motion } from 'framer-motion';
 import { AccountCircle, Email, Message } from '@mui/icons-material';
 import { useForm, ValidationError } from '@formspree/react';
 
-// Styled components for FormWrapper, FormTitle, and SubmitButton
+// Define styles for FormWrapper, FormTitle, and SubmitButton components
 const FormWrapper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3),
   borderRadius: '10px',
@@ -30,21 +30,23 @@ const SubmitButton = styled(Button)(({ theme }) => ({
 }));
 
 const Contact = () => {
+  // Integrate Formspree into React form
   const [state, handleSubmit] = useForm("xwkjvjnj");
+  // Set initial form data state
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
-  // Framer Motion variants for form animation
+  // Define animation variants for form
   const formVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
   };
 
-  // Handles form input changes
+  // Handle form input change events
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  // Check if the form is valid
+  // Check if the form data is valid
   const isFormValid = formData.name && formData.email && formData.message;
 
   return (
