@@ -1,10 +1,9 @@
-// Importing necessary React and Material-UI components
 import React from 'react';
 import { Card, CardContent, Typography, Grid, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/system';
 
-// FixedHeightCardContent: Custom CardContent component with fixed height and spacing
+// Custom styled CardContent component for setting the fixed height and layout.
 const FixedHeightCardContent = styled(CardContent)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -13,7 +12,7 @@ const FixedHeightCardContent = styled(CardContent)(({ theme }) => ({
   borderRadius: '15px',
 }));
 
-// StyledCard: Custom Card component with rounded corners and transition effects
+// Custom styled Card component for setting border, shadow, transition, and hover effects.
 const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: '15px',
   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
@@ -24,18 +23,41 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 const Portfolio = () => {
-  // Array of project objects
+  // Projects data
   const projects = [
-    //...
+    {
+      name: 'This website',
+      description: 'Just my own personal website to showcase my projects and skills.',
+      technologies: ['React', 'Material-UI', 'Framer Motion'],
+      repoLink: 'https://github.com/Inefy/personalsite',
+    },
+    {
+      name: 'Apple Health Visualizer',
+      description: 'Takes data from the Apple Health app and visualizes it.',
+      technologies: ['Python', 'Pandas'],
+      repoLink: 'https://github.com/Inefy/AppleHealthVisualizer',
+    },
+    {
+      name: 'MuseGenAI',
+      description: 'An AI-powered app that generates music notation and converts it into a MIDI file using parameters such as genre and instruments.',
+      technologies: ['Python', 'Flask', 'React.js', 'OpenAI API', 'PrettyMIDI'],
+      repoLink: 'https://github.com/Inefy/MuseGenAI',
+    },
+    {
+      name: 'SC2AI',
+      description: 'A StarCraft II AI must be trained to become the very best(like no one ever was).',
+      technologies: ['Python', 'TensorFlow', 'PySC2'],
+      repoLink: 'https://github.com/Inefy/sc2Bot',
+    },
   ];
 
-  // Framer Motion variants for hidden and visible states
+  // Framer Motion settings for hiding and showing components.
   const variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
   };
 
-  // Framer Motion transition settings
+  // Framer Motion settings for transition effects.
   const transition = {
     duration: 0.5,
     delay: 0.3,
@@ -45,20 +67,18 @@ const Portfolio = () => {
   return (
     <div>
       <Typography variant="h2" gutterBottom>
-        what i've been working on
+        What I've been working on
       </Typography>
       <Grid container spacing={4}>
-        {/* Iterating over the projects array */}
+        {/* Mapping through the projects array to render each project's information. */}
         {projects.map((project, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
-            {/* Using motion component for smooth animation */}
             <motion.div
               initial="hidden"
               animate="visible"
               variants={variants}
               transition={{ ...transition, delay: transition.delay * (index + 1) }}
             >
-              {/* Project Card */}
               <StyledCard>
                 <FixedHeightCardContent>
                   <div>
@@ -68,7 +88,6 @@ const Portfolio = () => {
                       Technologies: {project.technologies.join(', ')}
                     </Typography>
                   </div>
-                  {/* GitHub Project Link */}
                   <Button
                     variant="contained"
                     color="primary"
@@ -90,5 +109,4 @@ const Portfolio = () => {
   );
 };
 
-// Export Portfolio component as default
 export default Portfolio;
