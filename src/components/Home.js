@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Typography } from '@mui/material';
 import { styled } from '@mui/system';
-import { motion } from 'framer-motion';
 
 const HomeWrapper = styled(Container)(({ theme }) => ({
   display: 'flex',
@@ -10,27 +9,34 @@ const HomeWrapper = styled(Container)(({ theme }) => ({
   minHeight: 'calc(100vh - 64px)',
 }));
 
-const WelcomeText = styled(motion(Typography))(({ theme }) => ({
+const WelcomeText = styled(Typography)(({ theme }) => ({
   fontSize: '2.5rem',
   fontWeight: 600,
   marginBottom: theme.spacing(2),
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  borderRight: '.15em solid',
+  animation: '$cursor 0.75s step-end infinite',
+  '@keyframes cursor': {
+    '50%': { borderColor: 'transparent' },
+  },
 }));
 
 function Home() {
-  const textVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { delay: 0.5, duration: 1 } },
-  };
+  const text = "hello, i'm zac.";
+  const [textIndex, setTextIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTextIndex((prevTextIndex) => prevTextIndex + 1);
+    }, 150); // delay for typing speed
+    return () => clearTimeout(timer);
+  }, [textIndex]);
 
   return (
     <HomeWrapper>
-      <WelcomeText
-        color="text.primary"
-        variants={textVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        Welcome to my portfolio!
+      <WelcomeText color="text.primary">
+        {text.slice(0, textIndex)}
       </WelcomeText>
       <Typography color="text.primary">
         Explore my projects and get in touch if you're interested in collaborating.

@@ -9,18 +9,18 @@ import { AppBar, Toolbar, Typography, Container, IconButton, Box, CssBaseline } 
 import { styled } from '@mui/system';
 import { GitHub, LinkedIn, Brightness4, Brightness7 } from '@mui/icons-material';
 import theme from './theme';
+import { motion } from 'framer-motion';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
-  // Styled components for AppWrapper, StyledAppBar, StyledToolbar, and NavigationLink
   const AppWrapper = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.default,
     minHeight: '100vh',
     textAlign: 'center',
   }));
 
-  const StyledAppBar = styled(AppBar)({
+  const StyledAppBar = styled(motion(AppBar))({
     boxShadow: 'none',
   });
 
@@ -33,9 +33,13 @@ function App() {
     textDecoration: 'none',
   });
 
-  // Function to toggle dark mode
   const handleDarkModeToggle = () => {
     setDarkMode(!darkMode);
+  };
+
+  const appBarVariants = {
+    hidden: { y: -100, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8 } },
   };
 
   return (
@@ -43,9 +47,14 @@ function App() {
       <CssBaseline />
       <Router>
         <AppWrapper>
-          <StyledAppBar position="static" sx={{ backgroundColor: (theme) => theme.palette.primary.main }}>
+          <StyledAppBar
+            position="static"
+            sx={{ backgroundColor: (theme) => theme.palette.primary.main }}
+            variants={appBarVariants}
+            initial="hidden"
+            animate="visible"
+          >
             <StyledToolbar>
-              {/*  Navigation links section */}
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <NavigationLink to="/">
                   <Typography variant="h6" sx={{ color: (theme) => theme.palette.text.primary, margin: (theme) => theme.spacing(0, 2) }}>
@@ -68,7 +77,6 @@ function App() {
                   </Typography>
                 </NavigationLink>
               </Box>
-              {/* Social icons and dark mode toggle section */}
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <IconButton
                   onClick={handleDarkModeToggle}
@@ -99,12 +107,11 @@ function App() {
           </StyledAppBar>
           <Container>
             <div className="App-content">
-              {/*  Routes for different pages */}
               <Routes>
                 <Route path="/" element={<Home />} index />
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/paint" element={<PaintPage/>} />
+                <Route path="/paint" element={<PaintPage />} />
               </Routes>
             </div>
           </Container>
