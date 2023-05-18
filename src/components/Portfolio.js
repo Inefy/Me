@@ -1,10 +1,10 @@
+// Importing necessary React and Material-UI components
 import React from 'react';
 import { Card, CardContent, Typography, Grid, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/system';
 
-
-// Styled components for fixed-height CardContent and custom Card
+// FixedHeightCardContent: Custom CardContent component with fixed height and spacing
 const FixedHeightCardContent = styled(CardContent)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -13,7 +13,7 @@ const FixedHeightCardContent = styled(CardContent)(({ theme }) => ({
   borderRadius: '15px',
 }));
 
-
+// StyledCard: Custom Card component with rounded corners and transition effects
 const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: '15px',
   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
@@ -26,30 +26,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
 const Portfolio = () => {
   // Array of project objects
   const projects = [
-    {
-      name: 'This website',
-      description: 'Just my own personal website to showcase my projects and skills.',
-      technologies: ['React', 'Material-UI', 'Framer Motion'],
-      repoLink: 'https://github.com/Inefy/personalsite',
-    },
-    {
-      name: 'Apple Health Visualizer',
-      description: 'Takes data from the Apple Health app and visualizes it.',
-      technologies: ['Python', 'Pandas'],
-      repoLink: 'https://github.com/Inefy/AppleHealthVisualizer',
-    },
-    {
-      name: 'MuseGenAI',
-      description: 'An AI-powered app that generates music notation and converts it into a MIDI file using parameters such as genre and instruments.',
-      technologies: ['Python', 'Flask', 'React.js', 'OpenAI API', 'PrettyMIDI'],
-      repoLink: 'https://github.com/Inefy/MuseGenAI',
-    },
-    {
-      name: 'SC2AI',
-      description: 'A StarCraft II AI must be trined to become the very best(like no one ever was).',
-      technologies: ['Python', 'TensorFlow', 'PySC2'],
-      repoLink: 'https://github.com/Inefy/sc2Bot',
-    }
+    //...
   ];
 
   // Framer Motion variants for hidden and visible states
@@ -71,14 +48,17 @@ const Portfolio = () => {
         what i've been working on
       </Typography>
       <Grid container spacing={4}>
+        {/* Iterating over the projects array */}
         {projects.map((project, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
+            {/* Using motion component for smooth animation */}
             <motion.div
               initial="hidden"
               animate="visible"
               variants={variants}
               transition={{ ...transition, delay: transition.delay * (index + 1) }}
             >
+              {/* Project Card */}
               <StyledCard>
                 <FixedHeightCardContent>
                   <div>
@@ -88,6 +68,7 @@ const Portfolio = () => {
                       Technologies: {project.technologies.join(', ')}
                     </Typography>
                   </div>
+                  {/* GitHub Project Link */}
                   <Button
                     variant="contained"
                     color="primary"
@@ -109,5 +90,5 @@ const Portfolio = () => {
   );
 };
 
+// Export Portfolio component as default
 export default Portfolio;
-
