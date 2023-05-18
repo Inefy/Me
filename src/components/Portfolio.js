@@ -13,6 +13,7 @@ const FixedHeightCardContent = styled(CardContent)(({ theme }) => ({
   borderRadius: '15px',
 }));
 
+
 const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: '15px',
   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
@@ -36,6 +37,12 @@ const Portfolio = () => {
       description: 'Takes data from the Apple Health app and visualizes it.',
       technologies: ['Python', 'Pandas'],
       repoLink: 'https://github.com/Inefy/AppleHealthVisualizer',
+    },
+    {
+      name: 'MuseGenAI',
+      description: 'An AI-powered app that generates music notation and converts it into a MIDI file using parameters such as genre and instruments.',
+      technologies: ['Python', 'Flask', 'React.js', 'OpenAI API', 'PrettyMIDI'],
+      repoLink: 'https://github.com/Inefy/MuseGenAI',
     },
     {
       name: 'SC2AI',

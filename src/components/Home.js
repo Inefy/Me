@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import { motion } from 'framer-motion';
 
-// Styled components for HomeWrapper and WelcomeText
 const HomeWrapper = styled(Container)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -10,19 +10,28 @@ const HomeWrapper = styled(Container)(({ theme }) => ({
   minHeight: 'calc(100vh - 64px)',
 }));
 
-const WelcomeText = styled(Typography)(({ theme }) => ({
+const WelcomeText = styled(motion(Typography))(({ theme }) => ({
   fontSize: '2.5rem',
   fontWeight: 600,
   marginBottom: theme.spacing(2),
 }));
 
 function Home() {
+  const textVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { delay: 0.5, duration: 1 } },
+  };
+
   return (
-    // HomeWrapper contains the entire content of the home page
     <HomeWrapper>
-      {/* WelcomeText displays the main welcome message */}
-      <WelcomeText color="text.primary">Welcome to my portfolio!</WelcomeText>
-      {/*  Typography component for the additional text below the welcome message */}
+      <WelcomeText
+        color="text.primary"
+        variants={textVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        Welcome to my portfolio!
+      </WelcomeText>
       <Typography color="text.primary">
         Explore my projects and get in touch if you're interested in collaborating.
       </Typography>
