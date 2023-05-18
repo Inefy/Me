@@ -15,8 +15,10 @@ const WelcomeText = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   whiteSpace: 'nowrap',
   overflow: 'hidden',
-  borderRight: '.15em solid',
-  animation: '$cursor 0.75s step-end infinite',
+  '&.typing': {
+    borderRight: '.15em solid',
+    animation: '$cursor 0.75s step-end infinite',
+  },
   '@keyframes cursor': {
     '50%': { borderColor: 'transparent' },
   },
@@ -27,19 +29,21 @@ function Home() {
   const [textIndex, setTextIndex] = useState(0);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setTextIndex((prevTextIndex) => prevTextIndex + 1);
-    }, 150); // delay for typing speed
-    return () => clearTimeout(timer);
+    if (textIndex < text.length) {
+      const timer = setTimeout(() => {
+        setTextIndex((prevTextIndex) => prevTextIndex + 1);
+      }, 125); // delay for typing speed
+      return () => clearTimeout(timer);
+    }
   }, [textIndex]);
 
   return (
     <HomeWrapper>
-      <WelcomeText color="text.primary">
+      <WelcomeText color="text.primary" className={textIndex < text.length ? 'typing' : ''}>
         {text.slice(0, textIndex)}
       </WelcomeText>
       <Typography color="text.primary">
-        Explore my projects and get in touch if you're interested in collaborating.
+        Finishing up my Computer Science degree at Memorial Univeristy of Newfoundland.
       </Typography>
     </HomeWrapper>
   );

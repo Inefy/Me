@@ -68,7 +68,7 @@ const Portfolio = () => {
   return (
     <div>
       <Typography variant="h2" gutterBottom>
-        Portfolio
+        what i've been working on
       </Typography>
       <Grid container spacing={4}>
         {projects.map((project, index) => (
