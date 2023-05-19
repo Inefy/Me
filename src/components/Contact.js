@@ -17,6 +17,10 @@ import { useForm, ValidationError } from '@formspree/react';
 const FormWrapper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3),
   borderRadius: '10px',
+  marginTop: theme.spacing(2), // Add top margin
+  [theme.breakpoints.up('md')]: {
+    marginTop: theme.spacing(8), // Increase top margin on medium screens and up
+  },
 }));
 
 const FormTitle = styled(Typography)(({ theme }) => ({
@@ -50,8 +54,8 @@ const Contact = () => {
   const isFormValid = formData.name && formData.email && formData.message;
 
   return (
-    <Grid container justifyContent="center" style={{ height: 'calc(100vh - 64px)' }}>
-      <Grid item xs={12} sm={8} md={6}>
+    <Grid container justifyContent="center" style={{ minHeight: 'calc(100vh - 64px)' }}>
+      <Grid item xs={12} sm={10} md={8} lg={6}>
         <FormWrapper
           elevation={3}
           component={motion.div}
