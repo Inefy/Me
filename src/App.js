@@ -74,7 +74,6 @@ function App() {
                 <NavigationLink to="/"><Typography variant="h6" sx={{ color: (theme) => theme.palette.text.primary, margin: (theme) => theme.spacing(0, 2) }}>Home</Typography></NavigationLink>
                 <NavigationLink to="/portfolio"><Typography variant="h6" sx={{ color: (theme) => theme.palette.text.primary, margin: (theme) => theme.spacing(0, 2) }}>Portfolio</Typography></NavigationLink>
                 <NavigationLink to="/contact"><Typography variant="h6" sx={{ color: (theme) => theme.palette.text.primary, margin: (theme) => theme.spacing(0, 2) }}>Contact</Typography></NavigationLink>
-                <NavigationLink to="/paint"><Typography variant="h6" sx={{ color: (theme) => theme.palette.text.primary, margin: (theme) => theme.spacing(0, 2) }}>Paint</Typography></NavigationLink>
               </Box>
               {/* Utility Buttons */}
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
