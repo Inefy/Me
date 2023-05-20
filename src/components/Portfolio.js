@@ -1,11 +1,10 @@
 import React from 'react';
-import { Card, CardContent, Typography, Grid, Button } from '@mui/material';
+import { Card, CardContent, Typography, Grid, Button, CardMedia } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/system';
-import CardMedia from '@mui/material/CardMedia';
 
 // Importing images
-import websiteImage from './pics/applehealth.png';
+import websiteImage from './pics/website.png';
 import appleHealthImage from './pics/applehealth.png';
 import museGenImage from './pics/starcraft.jpg';
 import sc2Image from './pics/midi.png';
@@ -15,10 +14,20 @@ const FixedHeightCardContent = styled(CardContent)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
+  flex: '1 0 auto', // allows the content to shrink if needed
+}));
+
+// Styled container for the button
+const ButtonContainer = styled('div')(({ theme }) => ({
+  padding: theme.spacing(1),
+  textAlign: 'center',
 }));
 
 // Custom styled Card component for setting border, shadow, transition, and hover effects.
 const StyledCard = styled(Card)(({ theme }) => ({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
   borderRadius: '15px',
   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
   transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
@@ -32,7 +41,7 @@ const Portfolio = () => {
   const projects = [
     {
       name: 'This website',
-      description: 'Just my own personal website to showcase my projects and skills.',
+      description: 'Just my own personal website to showcase me and my projects.',
       technologies: ['React', 'Material-UI', 'Framer Motion'],
       repoLink: 'https://github.com/Inefy/personalsite',
       imagePath: websiteImage,
@@ -47,7 +56,7 @@ const Portfolio = () => {
     {
       name: 'MuseGenAI',
       description: 'An AI-powered app that generates music notation and converts it into a MIDI file.',
-      technologies: ['Python', 'Flask', 'React.js', 'OpenAI API', 'PrettyMIDI'],
+      technologies: ['Python', 'Flask', 'React.js', 'OpenAI API'],
       repoLink: 'https://github.com/Inefy/MuseGenAI',
       imagePath: museGenImage,
     },
@@ -91,30 +100,29 @@ const Portfolio = () => {
               <StyledCard>
                 <CardMedia
                   component="img"
-                  height="140"
+                  height="250"
                   image={project.imagePath}
                   alt={project.name}
                 />
                 <FixedHeightCardContent>
-                  <div>
                     <Typography variant="h5">{project.name}</Typography>
                     <Typography variant="body1">{project.description}</Typography>
                     <Typography variant="subtitle1">
                       Technologies: {project.technologies.join(', ')}
                     </Typography>
-                  </div>
+                </FixedHeightCardContent>
+                <ButtonContainer>
                   <Button
                     variant="contained"
                     color="primary"
                     size="large"
-                    sx={{ marginTop: '1rem' }}
                     href={project.repoLink}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     View on GitHub
                   </Button>
-                </FixedHeightCardContent>
+                </ButtonContainer>
               </StyledCard>
             </motion.div>
           </Grid>
