@@ -6,8 +6,8 @@ import { styled } from '@mui/system';
 // Importing images
 import websiteImage from './pics/website.png';
 import appleHealthImage from './pics/applehealth.png';
-import museGenImage from './pics/starcraft.jpg';
-import sc2Image from './pics/midi.png';
+import museGenImage from './pics/midi.png';
+import sc2Image from './pics/starcraft.jpg';
 
 // Custom styled CardContent component for setting the fixed height and layout.
 const FixedHeightCardContent = styled(CardContent)(({ theme }) => ({
