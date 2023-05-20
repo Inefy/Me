@@ -37,6 +37,17 @@ function App() {
     display: 'flex',
     alignItems: 'center',
     margin: (theme) => theme.spacing(0, 2),
+    '&:hover': {
+      color: 'common.yellow',
+      textDecoration: 'underline',
+    },
+  });
+
+  const StyledIconButton = styled(IconButton)({
+    color: 'common.white',
+    '&:hover': {
+      color: 'common.yellow',
+    },
   });
 
   const handleDarkModeToggle = () => {
@@ -63,22 +74,22 @@ function App() {
             <StyledToolbar>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <NavigationLink to="/">
-                <Typography variant="h6">Home</Typography>
+                  <Typography variant="h6">Home</Typography>
                   <ListItemIcon><HomeIcon sx={{ color: 'common.white' }} /></ListItemIcon>
                 </NavigationLink>
                 <NavigationLink to="/portfolio">
-                <Typography variant="h6">Portfolio</Typography>
+                  <Typography variant="h6">Portfolio</Typography>
                   <ListItemIcon><PortfolioIcon sx={{ color: 'common.white' }} /></ListItemIcon>
                 </NavigationLink>
                 <NavigationLink to="/contact">
-                <Typography variant="h6">Contact</Typography>
+                  <Typography variant="h6">Contact</Typography>
                   <ListItemIcon><ContactIcon sx={{ color: 'common.white' }} /></ListItemIcon>
                 </NavigationLink>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <IconButton onClick={handleDarkModeToggle} sx={{ color: 'common.white' }}>{darkMode ? <Brightness7 /> : <Brightness4 />}</IconButton>
-                <IconButton href="https://github.com/Inefy" target="_blank" rel="noopener" aria-label="github" sx={{ color: 'common.white' }}><GitHub /></IconButton>
-                <IconButton href="https://www.linkedin.com/in/zac-batten/" target="_blank" rel="noopener" aria-label="linkedin" sx={{ color: 'common.white' }}><LinkedIn /></IconButton>
+                <StyledIconButton onClick={handleDarkModeToggle}>{darkMode ? <Brightness7 sx={{ color: 'common.white' }} /> : <Brightness4 sx={{ color: 'common.white' }} />}</StyledIconButton>
+                <StyledIconButton href="https://github.com/Inefy" target="_blank" rel="noopener" aria-label="github"><GitHub sx={{ color: 'common.white' }} /></StyledIconButton>
+                <StyledIconButton href="https://www.linkedin.com/in/zac-batten/" target="_blank" rel="noopener" aria-label="linkedin"><LinkedIn sx={{ color: 'common.white' }} /></StyledIconButton>
               </Box>
             </StyledToolbar>
           </StyledAppBar>
