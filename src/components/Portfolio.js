@@ -2,14 +2,19 @@ import React from 'react';
 import { Card, CardContent, Typography, Grid, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/system';
+import CardMedia from '@mui/material/CardMedia';
+
+// Importing images
+import websiteImage from './pics/applehealth.png';
+import appleHealthImage from './pics/applehealth.png';
+import museGenImage from './pics/starcraft.jpg';
+import sc2Image from './pics/midi.png';
 
 // Custom styled CardContent component for setting the fixed height and layout.
 const FixedHeightCardContent = styled(CardContent)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  height: '260px',
-  borderRadius: '15px',
 }));
 
 // Custom styled Card component for setting border, shadow, transition, and hover effects.
@@ -30,24 +35,28 @@ const Portfolio = () => {
       description: 'Just my own personal website to showcase my projects and skills.',
       technologies: ['React', 'Material-UI', 'Framer Motion'],
       repoLink: 'https://github.com/Inefy/personalsite',
+      imagePath: websiteImage,
     },
     {
       name: 'Apple Health Visualizer',
       description: 'Takes data from the Apple Health app and visualizes it.',
       technologies: ['Python', 'Pandas'],
       repoLink: 'https://github.com/Inefy/AppleHealthVisualizer',
+      imagePath: appleHealthImage,
     },
     {
       name: 'MuseGenAI',
-      description: 'An AI-powered app that generates music notation and converts it into a MIDI file using parameters such as genre and instruments.',
+      description: 'An AI-powered app that generates music notation and converts it into a MIDI file.',
       technologies: ['Python', 'Flask', 'React.js', 'OpenAI API', 'PrettyMIDI'],
       repoLink: 'https://github.com/Inefy/MuseGenAI',
+      imagePath: museGenImage,
     },
     {
       name: 'SC2AI',
       description: 'A StarCraft II AI must be trained to become the very best(like no one ever was).',
       technologies: ['Python', 'TensorFlow', 'PySC2'],
       repoLink: 'https://github.com/Inefy/sc2Bot',
+      imagePath: sc2Image,
     },
   ];
 
@@ -72,7 +81,7 @@ const Portfolio = () => {
       <Grid container spacing={4}>
         {/* Mapping through the projects array to render each project's information. */}
         {projects.map((project, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
+          <Grid item xs={12} sm={6} md={6} key={index}>
             <motion.div
               initial="hidden"
               animate="visible"
@@ -80,6 +89,12 @@ const Portfolio = () => {
               transition={{ ...transition, delay: transition.delay * (index + 1) }}
             >
               <StyledCard>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={project.imagePath}
+                  alt={project.name}
+                />
                 <FixedHeightCardContent>
                   <div>
                     <Typography variant="h5">{project.name}</Typography>

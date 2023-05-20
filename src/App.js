@@ -5,7 +5,6 @@ import { AppBar, Toolbar, Typography, Container, IconButton, Box, CssBaseline, L
 import { GitHub, LinkedIn, Brightness4, Brightness7, Home as HomeIcon, Work as PortfolioIcon, Mail as ContactIcon } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
-
 import Home from './components/Home';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
