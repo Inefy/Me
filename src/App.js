@@ -50,6 +50,10 @@ function App() {
     },
   });
 
+  const MotionContainer = styled(motion(Container))({
+    transition: "all 0.3s ease-in-out",
+  });
+
   const handleDarkModeToggle = () => {
     setDarkMode(!darkMode);
   };
@@ -57,6 +61,11 @@ function App() {
   const appBarVariants = {
     hidden: { y: -100, opacity: 0 },
     visible: { y: 0, opacity: 1, transition: { duration: 0.8 } },
+  };
+
+  const pageVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.3 } },
   };
 
   return (
@@ -93,16 +102,12 @@ function App() {
               </Box>
             </StyledToolbar>
           </StyledAppBar>
-          <Container>
-            <div className="App-content">
-              <Routes>
-                <Route path="/" element={<Home />} index />
-                <Route path="/portfolio" element={<Portfolio />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/paint" element={<PaintPage />} />
-              </Routes>
-            </div>
-          </Container>
+          <Routes>
+            <Route path="/" element={<MotionContainer variants={pageVariants} initial="hidden" animate="visible"><Home /></MotionContainer>} index />
+            <Route path="/portfolio" element={<MotionContainer variants={pageVariants} initial="hidden" animate="visible"><Portfolio /></MotionContainer>} />
+            <Route path="/contact" element={<MotionContainer variants={pageVariants} initial="hidden" animate="visible"><Contact /></MotionContainer>} />
+            <Route path="/paint" element={<MotionContainer variants={pageVariants} initial="hidden" animate="visible"><PaintPage /></MotionContainer>} />
+          </Routes>
         </AppWrapper>
       </Router>
     </ThemeProvider>
