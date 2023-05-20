@@ -74,7 +74,7 @@ function Home() {
 
   // Testimonials data
   const testimonials = [
-    { text: 'Zac is an amazing developer!', author: 'John Doe' },
+    { text: 'Good job', author: 'A group project member' },
     { text: 'A pleasure to have in class.', author: 'Grade 8 social studies teacher' },
     { text: 'A very sweet boy.', author: 'My Mom' },
   ];

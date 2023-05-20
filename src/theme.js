@@ -11,7 +11,7 @@ const theme = (darkMode) =>
         main: darkMode ? '#f48fb1' : '#d81b60',
       },
       background: {
-        default: darkMode ? '#121212' : '#F8F8FF',  // Off-white color for light mode
+        default: darkMode ? '#121212' : '#F8F8FF',  
       },
     },
       typography: {
