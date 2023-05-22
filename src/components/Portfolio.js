@@ -47,25 +47,25 @@ const Portfolio = () => {
       imagePath: websiteImage,
     },
     {
-      name: 'Apple Health Visualizer',
-      description: 'Takes data from the Apple Health app and visualizes it.',
-      technologies: ['Python', 'Pandas'],
-      repoLink: 'https://github.com/Inefy/AppleHealthVisualizer',
-      imagePath: appleHealthImage,
-    },
-    {
       name: 'MuseGenAI',
       description: 'An AI-powered app that generates music notation and converts it into a MIDI file.',
-      technologies: ['Python', 'Flask', 'React.js', 'OpenAI API'],
+      technologies: ['Flask', 'React.js', 'Node.js', 'OpenAI API'],
       repoLink: 'https://github.com/Inefy/MuseGenAI',
       imagePath: museGenImage,
     },
     {
-      name: 'SC2AI',
+      name: 'NovaStar',
       description: 'A StarCraft II AI must be trained to become the very best(like no one ever was).',
-      technologies: ['Python', 'TensorFlow', 'PySC2'],
-      repoLink: 'https://github.com/Inefy/sc2Bot',
+      technologies: ['TensorFlow', 'Python', 'PySC2'],
+      repoLink: 'https://github.com/Inefy/NovaStar',
       imagePath: sc2Image,
+    },
+    {
+      name: 'Apple Health Visualizer',
+      description: 'Takes data from the Apple Health app and visualizes it.',
+      technologies: ['Pandas', 'Python'],
+      repoLink: 'https://github.com/Inefy/AppleHealthVisualizer',
+      imagePath: appleHealthImage,
     },
   ];
 
