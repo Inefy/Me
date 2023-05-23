@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography as MuiTypography, Card, CardContent, Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
+import { SERVER_IP } from '../config';
+
 
 // HomeWrapper: Main wrapper container with custom styles
 const HomeWrapper = styled(Container)(({ theme }) => ({
@@ -55,6 +57,18 @@ const TestimonialAuthor = styled(MuiTypography)(({ theme }) => ({
   textAlign: 'right',
 }));
 
+// VisitorCounterText: Custom typography for visitor count text
+const VisitorCounterText = styled(motion(MuiTypography))(({ theme }) => ({
+  position: 'fixed',
+  bottom: theme.spacing(2),
+  right: theme.spacing(2),
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.primary.contrastText,
+  padding: theme.spacing(1, 2),
+  borderRadius: theme.shape.borderRadius,
+  boxShadow: theme.shadows[3],
+}));
+
 // Home component
 function Home() {
   const text = "hello, i'm zac.";
@@ -86,9 +100,26 @@ function Home() {
       opacity: 1,
       y: 0,
       transition: {
-        delay: custom * 0.3, // 
+        delay: custom * 0.3, 
       },
     }),
+  };
+
+  // Visitor counter data
+  const [visitorCount, setVisitorCount] = useState(0);
+
+  // Fetch visitor count on mount and set state
+  useEffect(() => {
+    fetch(`${SERVER_IP}`)
+    .then(response => response.json())
+    .then(data => setVisitorCount(data.count));
+}, []);
+
+
+  // Framer Motion variants for visitor count animation
+  const counterVariants = {
+    hidden: { opacity: 0, scale: 0.5 },
+    visible: { opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 20 } },
   };
 
   return (
@@ -117,7 +148,7 @@ function Home() {
             variants={testimonialVariants}
             initial="hidden"
             animate="visible"
-            custom={i} // 
+            custom={i} 
             key={i}
           >
             <CardContent>
@@ -131,6 +162,11 @@ function Home() {
           </TestimonialCard>
         ))}
       </Box>
+
+      {/* Visitor Counter */}
+      <VisitorCounterText variant="h6" component={motion.div} variants={counterVariants} initial="hidden" animate="visible">
+        Visitors: {visitorCount}
+      </VisitorCounterText>
     </HomeWrapper>
   );
 }
