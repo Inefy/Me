@@ -6,7 +6,7 @@ function VisitorCounter() {
   const [visitorCount, setVisitorCount] = useState(0);
 
   useEffect(() => {
-    axios.get(`${SERVER_IP}`)
+    axios.get(`${SERVER_IP}/visitors`)
       .then(response => setVisitorCount(response.data.visitorCount));
   }, []);
 

@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography as MuiTypography, Card, CardContent, Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
-import { SERVER_IP } from '../config';
+const { SERVER_IP } = require('../config');
+
 
 
 // HomeWrapper: Main wrapper container with custom styles
@@ -110,9 +111,9 @@ function Home() {
 
   // Fetch visitor count on mount and set state
   useEffect(() => {
-    fetch(`${SERVER_IP}`)
+    fetch(`${SERVER_IP}/visitors`)
     .then(response => response.json())
-    .then(data => setVisitorCount(data.count));
+    .then(data => setVisitorCount(data.visitorCount));
 }, []);
 
 
