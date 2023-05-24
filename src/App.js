@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Container, IconButton, Box, CssBaseline, ListItemIcon } from '@mui/material';
@@ -12,8 +12,17 @@ import PaintPage from './components/paintapp/PaintPage';
 
 import theme from './theme';
 
+const { SERVER_IP } = require('./config');
+
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [visitorCount, setVisitorCount] = useState(0);
+
+  useEffect(() => {
+    fetch(`${SERVER_IP}/visitors`)
+    .then(response => response.json())
+    .then(data => setVisitorCount(data.visitorCount));
+  }, []);
 
   const AppWrapper = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.default,
@@ -102,7 +111,7 @@ function App() {
             </StyledToolbar>
           </StyledAppBar>
           <Routes>
-            <Route path="/" element={<MotionContainer variants={pageVariants} initial="hidden" animate="visible"><Home /></MotionContainer>} index />
+            <Route path="/" element={<MotionContainer variants={pageVariants} initial="hidden" animate="visible"><Home visitorCount={visitorCount} /></MotionContainer>} />
             <Route path="/portfolio" element={<MotionContainer variants={pageVariants} initial="hidden" animate="visible"><Portfolio /></MotionContainer>} />
             <Route path="/contact" element={<MotionContainer variants={pageVariants} initial="hidden" animate="visible"><Contact /></MotionContainer>} />
             <Route path="/paint" element={<MotionContainer variants={pageVariants} initial="hidden" animate="visible"><PaintPage /></MotionContainer>} />

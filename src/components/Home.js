@@ -3,9 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography as MuiTypography, Card, CardContent, Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
-const { SERVER_IP } = require('../config');
-
-
 
 // HomeWrapper: Main wrapper container with custom styles
 const HomeWrapper = styled(Container)(({ theme }) => ({
@@ -71,7 +68,7 @@ const VisitorCounterText = styled(motion(MuiTypography))(({ theme }) => ({
 }));
 
 // Home component
-function Home() {
+function Home({ visitorCount }) {
   const text = "hello, i'm zac.";
   const [textIndex, setTextIndex] = useState(0);
 
@@ -105,17 +102,6 @@ function Home() {
       },
     }),
   };
-
-  // Visitor counter data
-  const [visitorCount, setVisitorCount] = useState(0);
-
-  // Fetch visitor count on mount and set state
-  useEffect(() => {
-    fetch(`${SERVER_IP}/visitors`)
-    .then(response => response.json())
-    .then(data => setVisitorCount(data.visitorCount));
-}, []);
-
 
   // Framer Motion variants for visitor count animation
   const counterVariants = {
