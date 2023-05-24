@@ -125,7 +125,7 @@ function Home({ visitorCount }) {
       <Typography color="text.primary">Currently studying for my AWS Cloud Practitioner Certification.</Typography>
       <Typography color="text.primary">From St.John's, Newfoundland.</Typography>
       <Typography color="text.primary">I like building things.</Typography>
-      <h1>Testimonals</h1>
+      <h1>Testimonials</h1>
 
       {/* Testimonials */}
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
