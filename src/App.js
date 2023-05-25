@@ -9,7 +9,6 @@ import Home from './components/Home';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import PaintPage from './components/paintapp/PaintPage';
-
 import theme from './theme';
 
 const { SERVER_IP } = require('./config');

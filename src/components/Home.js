@@ -152,7 +152,7 @@ function Home({ visitorCount }) {
 
       {/* Visitor Counter */}
       <VisitorCounterText variant="h6" component={motion.div} variants={counterVariants} initial="hidden" animate="visible">
-        Visitors: {visitorCount}
+        Visits: {visitorCount}
       </VisitorCounterText>
     </HomeWrapper>
   );

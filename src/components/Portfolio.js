@@ -36,42 +36,42 @@ const StyledCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-const projects = [
-  {
-    name: 'This website',
-    description: 'Just my own personal website to showcase me and my projects.',
-    technologies: ['React', 'Material-UI', 'Framer Motion'],
-    repoLink: 'https://github.com/Inefy/personalsite',
-    imagePath: websiteImage,
-    altText: 'Screenshot of personal website',
-  },
-  {
-    name: 'MuseGenAI',
-    description: 'An AI-powered app that generates music notation and converts it into a MIDI file.',
-    technologies: ['Flask', 'React.js', 'Node.js', 'OpenAI API'],
-    repoLink: 'https://github.com/Inefy/MuseGenAI',
-    imagePath: museGenImage,
-    altText: 'Screenshot of MuseGenAI application',
-  },
-  {
-    name: 'NovaStar',
-    description: 'A StarCraft II AI must be trained to become the very best(like no one ever was).',
-    technologies: ['TensorFlow', 'Python', 'PySC2'],
-    repoLink: 'https://github.com/Inefy/NovaStar',
-    imagePath: sc2Image,
-    altText: 'Screenshot of NovaStar application',
-  },
-  {
-    name: 'Apple Health Visualizer',
-    description: 'Takes data from the Apple Health app and visualizes it.',
-    technologies: ['Pandas', 'Python'],
-    repoLink: 'https://github.com/Inefy/AppleHealthVisualizer',
-    imagePath: appleHealthImage,
-    altText: 'Screenshot of Apple Health Visualizer application',
-  },
-];
-
-
+const Portfolio = () => {
+  // Projects data
+  const projects = [
+    {
+      name: 'This website',
+      description: 'Just my own personal website to showcase me and my projects.',
+      technologies: ['React', 'Material-UI', 'Framer Motion'],
+      repoLink: 'https://github.com/Inefy/personalsite',
+      imagePath: websiteImage,
+      altText: 'Screenshot of personal website',
+    },
+    {
+      name: 'MuseGenAI',
+      description: 'An AI-powered app that generates music notation and converts it into a MIDI file.',
+      technologies: ['Flask', 'React.js', 'Node.js', 'OpenAI API'],
+      repoLink: 'https://github.com/Inefy/MuseGenAI',
+      imagePath: museGenImage,
+      altText: 'Screenshot of MuseGenAI application',
+    },
+    {
+      name: 'NovaStar',
+      description: 'A StarCraft II AI must be trained to become the very best(like no one ever was).',
+      technologies: ['TensorFlow', 'Python', 'PySC2'],
+      repoLink: 'https://github.com/Inefy/NovaStar',
+      imagePath: sc2Image,
+      altText: 'Screenshot of NovaStar application',
+    },
+    {
+      name: 'Apple Health Visualizer',
+      description: 'Takes data from the Apple Health app and visualizes it.',
+      technologies: ['Pandas', 'Python'],
+      repoLink: 'https://github.com/Inefy/AppleHealthVisualizer',
+      imagePath: appleHealthImage,
+      altText: 'Screenshot of Apple Health Visualizer application',
+    },
+  ];  
   // Framer Motion settings for hiding and showing components.
   const variants = {
     hidden: { opacity: 0 },
